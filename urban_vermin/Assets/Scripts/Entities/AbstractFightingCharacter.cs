@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class AbstractFightingCharacter : MonoBehaviour
 {
     public GameManager gameManager;
+    public GameObject hitboxPrefab;
 
     public const float MaxHealth = 100.0f;
 

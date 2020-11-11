@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  hitboxPrefab: {fileID: 8654691786916145505, guid: 4c7b8608104f4b84e8b81ba3eb16db1c,
+    type: 3}
 --- !u!50 &498975019201558284
 Rigidbody2D:
   serializedVersion: 4
