@@ -6,16 +6,15 @@ public class DamagingEntity : MonoBehaviour
 {
     public float damage;
     public float knockBack;
-
-    void Start()
-    {
-        damage = 10.0f;
-        knockBack = 5.0f;
-    }
+    public int direction = 0;
 
     //apply damage then delete this
     private void Update()
     {
+        //wait until direction has been assigned before checking for hits
+        if (direction == 0)
+            return;
+
         //check for hits
         GameObject[] allObjs = FindObjectsOfType<GameObject>();
         foreach (GameObject obj in allObjs)

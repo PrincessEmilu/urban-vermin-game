@@ -18,7 +18,7 @@ public abstract class AbstractFightingCharacter : MonoBehaviour
         DamagingEntity damageSource = damagingObject.GetComponent<DamagingEntity>();
 
         ApplyDamage(damageSource.damage);
-        ApplyKnockback(damageSource.knockBack);
+        ApplyKnockback(damageSource.knockBack, damageSource.direction);
     }
     protected virtual void ApplyDamage(float damage)
     {
@@ -27,6 +27,6 @@ public abstract class AbstractFightingCharacter : MonoBehaviour
         if (health <= 0)
             Debug.Log(gameObject.name + " has died!");
     }
-    protected abstract void ApplyKnockback(float knockBack);
+    protected abstract void ApplyKnockback(float knockBack, int direction);
 
 }

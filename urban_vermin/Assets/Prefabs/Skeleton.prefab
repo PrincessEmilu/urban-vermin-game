@@ -97,6 +97,10 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   hitboxPrefab: {fileID: 8654691786916145505, guid: 4c7b8608104f4b84e8b81ba3eb16db1c,
     type: 3}
+  sprites:
+  - {fileID: 21300000, guid: ac337db88a2e52749a06e3d28f80c1bc, type: 3}
+  - {fileID: 21300000, guid: c37b2af4fce03cb43a7e1e496e11f20c, type: 3}
+  - {fileID: 21300000, guid: 3137aece60896ca4885c53c632a0a6ee, type: 3}
 --- !u!50 &498975019201558284
 Rigidbody2D:
   serializedVersion: 4

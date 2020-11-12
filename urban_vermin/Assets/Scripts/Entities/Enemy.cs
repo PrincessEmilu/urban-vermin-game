@@ -6,6 +6,8 @@ public class Enemy : AbstractFightingCharacter
 {
     private GameObject player;
 
+    public Sprite[] sprites;
+
     private bool isAttacking = false;
     private int attackTimer = 0;
 
@@ -20,17 +22,27 @@ public class Enemy : AbstractFightingCharacter
         //behavior
         if (isAttacking)
         {
-            //attack
+            //wind up
+            if(attackTimer == 0)
+            {
+                setSprite(1);
+            }
 
             //create hitbox
-            if (attackTimer == 0)
+            if (attackTimer == 50)
             {
                 Vector2 spawnPoint;
                 if (GetComponent<SpriteRenderer>().flipX) //offset hitbox to left or right
                     spawnPoint = new Vector2(transform.position.x + 0.5f, transform.position.y);
                 else
                     spawnPoint = new Vector2(transform.position.x - 0.5f, transform.position.y);
-                Instantiate(hitboxPrefab, spawnPoint, Quaternion.identity);
+                GameObject hitbox = Instantiate(hitboxPrefab, spawnPoint, Quaternion.identity);
+                if(GetComponent<SpriteRenderer>().flipX) //set direction of hitbox
+                    hitbox.GetComponent<DamagingEntity>().direction = 1;
+                else
+                    hitbox.GetComponent<DamagingEntity>().direction = -1;
+
+                setSprite(2);
             }
 
             attackTimer++;
@@ -44,6 +56,7 @@ public class Enemy : AbstractFightingCharacter
         }
         else
         {
+            setSprite(0);
 
             //movement
             if ((player.transform.position - gameObject.transform.position).magnitude < 1)
@@ -75,8 +88,17 @@ public class Enemy : AbstractFightingCharacter
         rigidBody.MoveRotation(Quaternion.LookRotation(transform.forward, Vector3.up));
     }
 
-    protected override void ApplyKnockback(float knockBack)
+    protected override void ApplyKnockback(float knockBack, int direction)
     {
+        //add force to rigidbody
+        rigidBody.AddForce(new Vector2(knockBack * direction, 0));
+
         Debug.Log("ApplyKnockback(): Not implemented yet.");
+    }
+
+    //0 = idle, 1 = wind up, 2 = swing
+    private void setSprite(int index)
+    {
+        GetComponent<SpriteRenderer>().sprite = sprites[index];
     }
 }
