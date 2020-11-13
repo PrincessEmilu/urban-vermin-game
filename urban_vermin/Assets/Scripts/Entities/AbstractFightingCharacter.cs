@@ -11,7 +11,12 @@ public abstract class AbstractFightingCharacter : MonoBehaviour
 
     protected float health;
     protected Rigidbody2D rigidBody;
-    protected BoxCollider2D boxCollider;
+    protected Collider2D collider;
+
+    public virtual void Start()
+    {
+        rigidBody = gameObject.GetComponent<Rigidbody2D>();
+    }
 
     public virtual void TakeDamage(GameObject damagingObject)
     {
@@ -24,8 +29,14 @@ public abstract class AbstractFightingCharacter : MonoBehaviour
     {
         health -= damage;
         Debug.Log(gameObject.name + " has taken " + damage + " damage!");
+
         if (health <= 0)
-            Debug.Log(gameObject.name + " has died!");
+            HandleDeath();
+    }
+
+    protected virtual void HandleDeath()
+    {
+        Debug.Log(gameObject.name + " has died!");
     }
     protected abstract void ApplyKnockback(float knockBack, int direction);
 

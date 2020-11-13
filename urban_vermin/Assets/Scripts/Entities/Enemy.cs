@@ -92,8 +92,6 @@ public class Enemy : AbstractFightingCharacter
     {
         //add force to rigidbody
         rigidBody.AddForce(new Vector2(knockBack * direction, 0));
-
-        Debug.Log("ApplyKnockback(): Not implemented yet.");
     }
 
     //0 = idle, 1 = wind up, 2 = swing
