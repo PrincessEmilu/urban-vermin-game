@@ -6,15 +6,21 @@ public class Enemy : AbstractFightingCharacter
 {
     private GameObject player;
 
-    public Sprite[] sprites;
-
     private bool isAttacking = false;
     private int attackTimer = 0;
 
+    //edit these between different enemies
+    public Sprite[] sprites;
+    public float speed;
+    public float attackDistance;
+    public int attackSpeed;
+    public float swingDistance;
+
+
     void Start()
     {
+        base.Start();
         player = GameObject.FindGameObjectWithTag("Player");
-        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -29,13 +35,13 @@ public class Enemy : AbstractFightingCharacter
             }
 
             //create hitbox
-            if (attackTimer == 50)
+            if (attackTimer == attackSpeed)
             {
                 Vector2 spawnPoint;
                 if (GetComponent<SpriteRenderer>().flipX) //offset hitbox to left or right
-                    spawnPoint = new Vector2(transform.position.x + 0.5f, transform.position.y);
+                    spawnPoint = new Vector2(transform.position.x + swingDistance, transform.position.y);
                 else
-                    spawnPoint = new Vector2(transform.position.x - 0.5f, transform.position.y);
+                    spawnPoint = new Vector2(transform.position.x - swingDistance, transform.position.y);
                 GameObject hitbox = Instantiate(hitboxPrefab, spawnPoint, Quaternion.identity);
                 hitbox.GetComponent<DamagingEntity>().sender = gameObject;
                 if(GetComponent<SpriteRenderer>().flipX) //set direction of hitbox
@@ -47,7 +53,7 @@ public class Enemy : AbstractFightingCharacter
             }
 
             //end attack
-            if (attackTimer >= 100)
+            if (attackTimer >= attackSpeed * 2)
             {
                 isAttacking = false;
                 attackTimer = 0;
@@ -60,7 +66,7 @@ public class Enemy : AbstractFightingCharacter
             setSprite(0);
 
             //movement
-            if ((player.transform.position - gameObject.transform.position).magnitude < 1.6)
+            if ((player.transform.position - gameObject.transform.position).magnitude < attackDistance)
             {
                 //stop moving
                 rigidBody.velocity = new Vector2(0, 0);
@@ -73,13 +79,13 @@ public class Enemy : AbstractFightingCharacter
                 if (player.transform.position.x < gameObject.transform.position.x)
                 {
                     //move left
-                    rigidBody.velocity = new Vector2(-1, 0);
+                    rigidBody.velocity = new Vector2(-speed, 0);
                     GetComponent<SpriteRenderer>().flipX = false;
                 }
                 else
                 {
                     //move right
-                    rigidBody.velocity = new Vector2(1, 0);
+                    rigidBody.velocity = new Vector2(speed, 0);
                     GetComponent<SpriteRenderer>().flipX = true;
                 }
             }
