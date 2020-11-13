@@ -16,6 +16,11 @@ public class Player : AbstractFightingCharacter
     private const KeyCode fireKey = KeyCode.C;
     #endregion
 
+    public GameObject bulletPrefab;
+    public GameObject flamePrefab;
+
+    //The position to spawn the bullet - essentially it's an offset from the prefab's center
+    private Vector2 bulletSpawnOffset;
 
     private float walkSpeed;
     private float jumpForce;
@@ -24,16 +29,38 @@ public class Player : AbstractFightingCharacter
     private bool wasOnGroundLastFrame;
 
     private ContactFilter2D contactFilter;
-        //if (playerCollider.OverlapCollider(contactFilter, collisions) > 0)
+    //if (playerCollider.OverlapCollider(contactFilter, collisions) > 0)
 
+    #region Attacking - Properties and Fields
     public int Ammo { get; private set; }
     public float Willpower { get; private set; }
 
+    public bool IsAttacking
+    { 
+        get
+        {
+            return isUsingStaff || isUsingGun || isUsingSpell;
+        }
+    }
+
     private bool isUsingSpell;
+    private bool isUsingGun;
+    private bool isUsingStaff;
 
     private const int maxAmmo = 24;
     private const float maxWillpower = 100.0f;
     private const float willpowerRechargeRate = 0.25f;
+
+    private const int gunWindupMax = 100;
+    private const int gunActiveFramesMax = 10;
+    private int gunWindup = 0;
+    private int gunActiveFrames = 0;
+
+    private const int bashWindupMax = 100;
+    private const int staffActiveFramesMax = 10;
+    private int bashWindup = 0;
+    private int staffActiveFrames = 0;
+    #endregion
 
     public override void Start()
     {
@@ -42,8 +69,13 @@ public class Player : AbstractFightingCharacter
         collider = gameObject.GetComponent<CapsuleCollider2D>();
         contactFilter = new ContactFilter2D();
 
-        hasJump = true;
+        bulletSpawnOffset = new Vector2(1.0f, 1.0f);
+
         isUsingSpell = false;
+        isUsingGun = false;
+        isUsingStaff = false;
+
+        hasJump = true;
         wasOnGroundLastFrame = true;
         walkSpeed = 7.50f;
         jumpForce = 200.0f;
@@ -51,6 +83,13 @@ public class Player : AbstractFightingCharacter
         health = 100;
         Ammo = maxAmmo;
         Willpower = maxWillpower;
+
+        // Error-checking: Are the bullet and flame attack prefabs assigned?
+        if (bulletPrefab == null)
+            Debug.LogError("No bullet prefab assigned to player!");
+
+        if (flamePrefab == null)
+            Debug.LogError("No flame prefab assigned to player!");
     }
 
     private void Update()
@@ -102,18 +141,89 @@ public class Player : AbstractFightingCharacter
     // Checks the player's key presses and handles doing the appropriate attacks
     private void HandleAttacks()
     {
-        if (Input.GetKeyDown(fireKey))
+        // Begin attacking if an attack isn't in progress
+        if (!IsAttacking)
         {
-
+            // First press of the firespell key
+            if (Input.GetKeyDown(fireKey))
+            {
+                Debug.Log("Fire not implemented");
+            }
+            // First press of the gun
+            else if (!isUsingGun && Input.GetKeyDown(gunKey))
+            {
+                isUsingGun = true;
+            }
+            // First swing of the staff
+            else if (Input.GetKeyDown(bashKey))
+            {
+                isUsingStaff = true;
+            }
         }
-        else if (Input.GetKeyDown(gunKey))
+
+        // Update attacks that are in progress
+        if (IsAttacking)
         {
+            // TODO: Fire will need to go here, probably
 
-        }
-        else if (Input.GetKeyDown(bashKey))
-        {
+            // If the gun is being used
+            if (isUsingGun)
+            { 
+                // Windup is still happening
+                if (gunWindup < gunWindupMax)
+                {
+                    gunWindup++;
 
+                    // TODO: Animation stuff, presumably
+                }
+                // Windup done, shoot the gun
+                else if (gunActiveFrames == 0)
+                {
+                    ShootGun();
+                    gunActiveFrames++;
+                }
+                // Attack animation is playing out
+                else if (gunActiveFrames < gunActiveFramesMax)
+                {
+                    gunActiveFrames++;
+
+                    // TODO: Animation stuff, presumably
+                }
+                // Attack animation is totally done, reset for next attack
+                else
+                {
+                    gunActiveFrames = 0;
+                    gunWindup = 0;
+                    isUsingGun = false;
+                }
+            }
+            else if (isUsingStaff)
+            {
+                // Windup is still happening
+                if (bashWindup < bashWindupMax)
+                {
+                    bashWindup++;
+                }
+                // Windup is done, attack is happening - staff swing happens continuously throughout the attack
+                else if (staffActiveFrames < staffActiveFramesMax)
+                {
+                    SwingStaff();
+                    staffActiveFrames++;
+                }
+            }
         }
+    }
+
+    // Fires a single bullet from the gun
+    private void ShootGun()
+    {
+        Debug.Log("Pew Pew");
+    }
+
+    // Swings the staff over a period of time, has a hitbox "out"
+    private void SwingStaff()
+    {
+        Debug.Log("SWOOSH");
     }
 
     private void CheckGrounded()
