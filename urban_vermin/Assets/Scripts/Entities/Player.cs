@@ -85,11 +85,11 @@ public class Player : AbstractFightingCharacter
         Willpower = maxWillpower;
 
         // Error-checking: Are the bullet and flame attack prefabs assigned?
-        if (bulletPrefab == null)
-            Debug.LogError("No bullet prefab assigned to player!");
+        //if (bulletPrefab == null)
+            //Debug.LogError("No bullet prefab assigned to player!");
 
-        if (flamePrefab == null)
-            Debug.LogError("No flame prefab assigned to player!");
+        //if (flamePrefab == null)
+           //Debug.LogError("No flame prefab assigned to player!");
     }
 
     private void Update()
