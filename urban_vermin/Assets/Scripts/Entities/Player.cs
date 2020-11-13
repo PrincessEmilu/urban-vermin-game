@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class Player : AbstractFightingCharacter
 {
+    #region Define Keyboard Controls
+    // Movement
+    private const KeyCode jumpKey = KeyCode.UpArrow;
+    private const KeyCode leftKey = KeyCode.LeftArrow;
+    private const KeyCode rightKey = KeyCode.RightArrow;
+
+    // Attacks
+    private const KeyCode bashKey = KeyCode.Z;
+    private const KeyCode gunKey = KeyCode.X;
+    private const KeyCode fireKey = KeyCode.C;
+    #endregion
+
+
     private float walkSpeed;
     private float jumpForce;
 
@@ -13,6 +26,15 @@ public class Player : AbstractFightingCharacter
     private ContactFilter2D contactFilter;
         //if (playerCollider.OverlapCollider(contactFilter, collisions) > 0)
 
+    public int Ammo { get; private set; }
+    public float Willpower { get; private set; }
+
+    private bool isUsingSpell;
+
+    private const int maxAmmo = 24;
+    private const float maxWillpower = 100.0f;
+    private const float willpowerRechargeRate = 0.25f;
+
     public override void Start()
     {
         base.Start();
@@ -21,11 +43,14 @@ public class Player : AbstractFightingCharacter
         contactFilter = new ContactFilter2D();
 
         hasJump = true;
+        isUsingSpell = false;
         wasOnGroundLastFrame = true;
         walkSpeed = 7.50f;
         jumpForce = 200.0f;
 
         health = 100;
+        Ammo = maxAmmo;
+        Willpower = maxWillpower;
     }
 
     private void Update()
@@ -40,6 +65,13 @@ public class Player : AbstractFightingCharacter
 
         // Move the player based on input
         MovePlayer();
+
+        // Process keyboard input and manage attacks
+        HandleAttacks();
+
+        // Recharge willpower if not full or being used this frame
+        if (Willpower < maxWillpower && !isUsingSpell)
+            Willpower += willpowerRechargeRate;
     }
 
     private void MovePlayer()
@@ -47,17 +79,17 @@ public class Player : AbstractFightingCharacter
         Vector2 moveForce = new Vector2(0, 0);
 
         // Move left or right
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(leftKey))
         {
             moveForce.x = -walkSpeed;
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(rightKey))
         {
             moveForce.x = walkSpeed;
         }
 
         // Jump if available
-        if (hasJump && Input.GetKeyDown(KeyCode.UpArrow))
+        if (hasJump && Input.GetKeyDown(jumpKey))
         {
             hasJump = false;
             moveForce.y = jumpForce;
@@ -65,6 +97,23 @@ public class Player : AbstractFightingCharacter
 
         // Apply the movement force
         rigidBody.AddForce(moveForce);
+    }
+
+    // Checks the player's key presses and handles doing the appropriate attacks
+    private void HandleAttacks()
+    {
+        if (Input.GetKeyDown(fireKey))
+        {
+
+        }
+        else if (Input.GetKeyDown(gunKey))
+        {
+
+        }
+        else if (Input.GetKeyDown(bashKey))
+        {
+
+        }
     }
 
     private void CheckGrounded()
