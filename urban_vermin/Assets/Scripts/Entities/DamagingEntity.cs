@@ -7,6 +7,7 @@ public class DamagingEntity : MonoBehaviour
     public float damage;
     public float knockBack;
     public int direction = 0;
+    public GameObject sender;
 
     //apply damage then delete this
     private void Update()
@@ -23,7 +24,8 @@ public class DamagingEntity : MonoBehaviour
             {
                 if (GetComponent<Collider2D>().IsTouching(obj.GetComponent<Collider2D>())) //if touching
                 {
-                    obj.GetComponent<AbstractFightingCharacter>().TakeDamage(gameObject);
+                    if(obj != sender) //dont hit yourself
+                        obj.GetComponent<AbstractFightingCharacter>().TakeDamage(gameObject);
                 }
             }
         }

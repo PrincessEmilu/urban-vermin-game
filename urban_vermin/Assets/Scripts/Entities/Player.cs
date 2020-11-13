@@ -19,7 +19,5 @@ public class Player : AbstractFightingCharacter
     {
         //add force to rigidbody
         rigidBody.AddForce(new Vector2(knockBack * direction, 75));
-
-        Debug.Log("ApplyKnockback(): Not implemented yet.");
     }
 }

@@ -23,7 +23,7 @@ public class Enemy : AbstractFightingCharacter
         if (isAttacking)
         {
             //wind up
-            if(attackTimer == 0)
+            if(attackTimer == 1)
             {
                 setSprite(1);
             }
@@ -37,6 +37,7 @@ public class Enemy : AbstractFightingCharacter
                 else
                     spawnPoint = new Vector2(transform.position.x - 0.5f, transform.position.y);
                 GameObject hitbox = Instantiate(hitboxPrefab, spawnPoint, Quaternion.identity);
+                hitbox.GetComponent<DamagingEntity>().sender = gameObject;
                 if(GetComponent<SpriteRenderer>().flipX) //set direction of hitbox
                     hitbox.GetComponent<DamagingEntity>().direction = 1;
                 else
@@ -45,21 +46,21 @@ public class Enemy : AbstractFightingCharacter
                 setSprite(2);
             }
 
-            attackTimer++;
-
             //end attack
             if (attackTimer >= 100)
             {
                 isAttacking = false;
                 attackTimer = 0;
             }
+
+            attackTimer++;
         }
         else
         {
             setSprite(0);
 
             //movement
-            if ((player.transform.position - gameObject.transform.position).magnitude < 1)
+            if ((player.transform.position - gameObject.transform.position).magnitude < 1.6)
             {
                 //stop moving
                 rigidBody.velocity = new Vector2(0, 0);
@@ -91,9 +92,7 @@ public class Enemy : AbstractFightingCharacter
     protected override void ApplyKnockback(float knockBack, int direction)
     {
         //add force to rigidbody
-        rigidBody.AddForce(new Vector2(knockBack * direction, 0));
-
-        Debug.Log("ApplyKnockback(): Not implemented yet.");
+        rigidBody.AddForce(new Vector2(knockBack * direction, 75));
     }
 
     //0 = idle, 1 = wind up, 2 = swing
