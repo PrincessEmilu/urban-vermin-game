@@ -8,9 +8,16 @@ public class DamagingEntity : MonoBehaviour
     public float knockBack;
     public int direction = 0;
     public GameObject sender;
+    protected Rigidbody2D rigidBody;
+
+
+    protected virtual void Start()
+    {
+        rigidBody = gameObject.GetComponent<Rigidbody2D>();
+    }
 
     //apply damage then delete this
-    private void Update()
+    protected virtual void Update()
     {
         //wait until direction has been assigned before checking for hits
         if (direction == 0)
@@ -31,7 +38,7 @@ public class DamagingEntity : MonoBehaviour
         }
 
         //delete this
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 
 }

@@ -291,7 +291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334013275}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 66.02, y: 0, z: 0}
+  m_LocalPosition: {x: 66.02, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -348,7 +348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399118866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 66.4, y: -3.28, z: 0}
+  m_LocalPosition: {x: 66.4, y: -3.28, z: 1}
   m_LocalScale: {x: 1005.8613, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -466,7 +466,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   hitboxPrefab: {fileID: 0}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 6453615585793348310, guid: a96be271db7290847a6299f2a7242af4,
+    type: 3}
   flamePrefab: {fileID: 0}
 --- !u!50 &2124125569
 Rigidbody2D:
@@ -504,7 +505,7 @@ PrefabInstance:
     - target: {fileID: 9213749501920169045, guid: fef288d88b3eaf743bd0fba54769c03a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.1797786
+      value: 27.63
       objectReference: {fileID: 0}
     - target: {fileID: 9213749501920169045, guid: fef288d88b3eaf743bd0fba54769c03a,
         type: 3}

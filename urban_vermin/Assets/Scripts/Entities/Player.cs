@@ -51,7 +51,7 @@ public class Player : AbstractFightingCharacter
     private const float maxWillpower = 100.0f;
     private const float willpowerRechargeRate = 0.25f;
 
-    private const int gunWindupMax = 100;
+    private const int gunWindupMax = 30;
     private const int gunActiveFramesMax = 10;
     private int gunWindup = 0;
     private int gunActiveFrames = 0;
@@ -69,7 +69,7 @@ public class Player : AbstractFightingCharacter
         collider = gameObject.GetComponent<CapsuleCollider2D>();
         contactFilter = new ContactFilter2D();
 
-        bulletSpawnOffset = new Vector2(1.0f, 1.0f);
+        bulletSpawnOffset = new Vector2(1.0f, 0.0f);
 
         isUsingSpell = false;
         isUsingGun = false;
@@ -85,8 +85,8 @@ public class Player : AbstractFightingCharacter
         Willpower = maxWillpower;
 
         // Error-checking: Are the bullet and flame attack prefabs assigned?
-        //if (bulletPrefab == null)
-            //Debug.LogError("No bullet prefab assigned to player!");
+        if (bulletPrefab == null)
+            Debug.LogError("No bullet prefab assigned to player!");
 
         //if (flamePrefab == null)
            //Debug.LogError("No flame prefab assigned to player!");
@@ -168,7 +168,8 @@ public class Player : AbstractFightingCharacter
 
             // If the gun is being used
             if (isUsingGun)
-            { 
+            {
+                Debug.Log("Is using gun");
                 // Windup is still happening
                 if (gunWindup < gunWindupMax)
                 {
@@ -217,7 +218,11 @@ public class Player : AbstractFightingCharacter
     // Fires a single bullet from the gun
     private void ShootGun()
     {
-        Debug.Log("Pew Pew");
+        Debug.Log("PEw pew");
+        Vector3 bulletSpawnpoint = transform.position + new Vector3(bulletSpawnOffset.x, bulletSpawnOffset.y, 0);
+        Bullet newBullet = Instantiate(bulletPrefab, bulletSpawnpoint, Quaternion.identity).GetComponent<Bullet>();
+        newBullet.sender = gameObject;
+        newBullet.direction = 1; // TODO: Player needs to know which direction it is facing!
     }
 
     // Swings the staff over a period of time, has a hitbox "out"
