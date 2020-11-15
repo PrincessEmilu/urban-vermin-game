@@ -6,7 +6,7 @@ public class Bullet : DamagingEntity
 {
     public float movespeed = 1000;
 
-    private void Update()
+    protected override void Update()
     {
         base.Update();
 

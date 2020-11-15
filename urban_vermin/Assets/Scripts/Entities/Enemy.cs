@@ -108,4 +108,10 @@ public class Enemy : AbstractFightingCharacter
     {
         GetComponent<SpriteRenderer>().sprite = sprites[index];
     }
+
+    protected override void HandleDeath()
+    {
+        base.HandleDeath();
+        Destroy(gameObject);
+    }
 }

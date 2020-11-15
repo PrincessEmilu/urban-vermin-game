@@ -23,6 +23,9 @@ public class Player : AbstractFightingCharacter
     private Vector2 bulletSpawnOffset;
     private Vector2 flamethrowerOffset;
 
+    // The direction this character is facing, 1 for the right, -1 for the left, 0 is unitialized
+    private int direction = 0;
+
     private float walkSpeed;
     private float jumpForce;
 
@@ -84,6 +87,7 @@ public class Player : AbstractFightingCharacter
 
         hasJump = true;
         wasOnGroundLastFrame = true;
+        direction = 1;
         walkSpeed = 7.50f;
         jumpForce = 200.0f;
 
@@ -127,10 +131,12 @@ public class Player : AbstractFightingCharacter
         // Move left or right
         if (Input.GetKey(leftKey))
         {
+            direction = -1;
             moveForce.x = -walkSpeed;
         }
         else if (Input.GetKey(rightKey))
         {
+            direction = 1;
             moveForce.x = walkSpeed;
         }
 
@@ -155,7 +161,10 @@ public class Player : AbstractFightingCharacter
             if (Input.GetKeyDown(fireKey))
             {
                 isUsingFlamethrower = true;
+
                 flamethrowerInstance.SetActive(true);
+                Flamethrower flameThrowerScript = flamethrowerInstance.GetComponent<Flamethrower>();
+                flameThrowerScript.direction = direction;
             }
             // First press of the gun
             else if (!isUsingGun && Input.GetKeyDown(gunKey))
@@ -183,7 +192,8 @@ public class Player : AbstractFightingCharacter
                 }
                 else
                 {
-                    flamethrowerInstance.GetComponent<Flamethrower>().offsetVector = new Vector3(flamethrowerOffset.x, flamethrowerOffset.y, -1);
+                    Flamethrower flameThrowerScript = flamethrowerInstance.GetComponent<Flamethrower>();
+                    flameThrowerScript.offsetVector = new Vector3(flamethrowerOffset.x, flamethrowerOffset.y, -1);
                     Willpower -= flamethrowerCost;
                 }
             }
@@ -238,10 +248,12 @@ public class Player : AbstractFightingCharacter
     // Fires a single bullet from the gun
     private void ShootGun()
     {
-        Vector3 bulletSpawnpoint = transform.position + new Vector3(bulletSpawnOffset.x, bulletSpawnOffset.y, 0);
+        Vector3 bulletSpawnpoint = transform.position + ( direction * new Vector3(bulletSpawnOffset.x, bulletSpawnOffset.y, 0));
+
         Bullet newBullet = Instantiate(bulletPrefab, bulletSpawnpoint, Quaternion.identity).GetComponent<Bullet>();
         newBullet.sender = gameObject;
-        newBullet.direction = 1; // TODO: Player needs to know which direction it is facing!
+        newBullet.direction = direction;
+        newBullet.gameObject.transform.localScale *= direction;
     }
 
     // Swings the staff over a period of time, has a hitbox "out"
