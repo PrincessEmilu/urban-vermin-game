@@ -98,7 +98,9 @@ public class Enemy : AbstractFightingCharacter
     protected override void ApplyKnockback(float knockBack, int direction)
     {
         //add force to rigidbody
-        rigidBody.AddForce(new Vector2(knockBack * direction, 75));
+        //rigidBody.AddForce(new Vector2(knockBack * direction, 75));
+        rigidBody.AddForce(new Vector2(knockBack * direction, 0));
+
     }
 
     //0 = idle, 1 = wind up, 2 = swing

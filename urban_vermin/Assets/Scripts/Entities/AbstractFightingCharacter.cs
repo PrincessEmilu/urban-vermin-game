@@ -9,7 +9,7 @@ public abstract class AbstractFightingCharacter : MonoBehaviour
 
     public const float MaxHealth = 100.0f;
 
-    protected float health;
+    public float health;
     protected Rigidbody2D rigidBody;
     protected Collider2D collider;
 

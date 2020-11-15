@@ -17,10 +17,11 @@ public class Player : AbstractFightingCharacter
     #endregion
 
     public GameObject bulletPrefab;
-    public GameObject flamePrefab;
+    public GameObject flamethrowerInstance;
 
-    //The position to spawn the bullet - essentially it's an offset from the prefab's center
+    // Offsets for spawning the player's attacks - essentially an offset from the prefab's center
     private Vector2 bulletSpawnOffset;
+    private Vector2 flamethrowerOffset;
 
     private float walkSpeed;
     private float jumpForce;
@@ -39,13 +40,16 @@ public class Player : AbstractFightingCharacter
     { 
         get
         {
-            return isUsingStaff || isUsingGun || isUsingSpell;
+            return isUsingStaff || isUsingGun || isUsingFlamethrower;
         }
     }
 
-    private bool isUsingSpell;
+    private bool isUsingFlamethrower;
     private bool isUsingGun;
     private bool isUsingStaff;
+
+    // Willpower cost per frame
+    private float flamethrowerCost = 0.1f;
 
     private const int maxAmmo = 24;
     private const float maxWillpower = 100.0f;
@@ -66,12 +70,15 @@ public class Player : AbstractFightingCharacter
     {
         base.Start();
 
+        flamethrowerInstance.SetActive(false);
+
         collider = gameObject.GetComponent<CapsuleCollider2D>();
         contactFilter = new ContactFilter2D();
 
         bulletSpawnOffset = new Vector2(1.0f, 0.0f);
+        flamethrowerOffset = new Vector2(2.0f, 0.0f);
 
-        isUsingSpell = false;
+        isUsingFlamethrower = false;
         isUsingGun = false;
         isUsingStaff = false;
 
@@ -109,7 +116,7 @@ public class Player : AbstractFightingCharacter
         HandleAttacks();
 
         // Recharge willpower if not full or being used this frame
-        if (Willpower < maxWillpower && !isUsingSpell)
+        if (Willpower < maxWillpower && !isUsingFlamethrower)
             Willpower += willpowerRechargeRate;
     }
 
@@ -147,7 +154,8 @@ public class Player : AbstractFightingCharacter
             // First press of the firespell key
             if (Input.GetKeyDown(fireKey))
             {
-                Debug.Log("Fire not implemented");
+                isUsingFlamethrower = true;
+                flamethrowerInstance.SetActive(true);
             }
             // First press of the gun
             else if (!isUsingGun && Input.GetKeyDown(gunKey))
@@ -164,12 +172,24 @@ public class Player : AbstractFightingCharacter
         // Update attacks that are in progress
         if (IsAttacking)
         {
-            // TODO: Fire will need to go here, probably
-
+            // Flamethrower is being used
+            if (isUsingFlamethrower)
+            {
+                // Stop using the flamethrower if out of willpower or key isn't being held
+                if (!Input.GetKey(fireKey) || Willpower == 0)
+                {
+                    flamethrowerInstance.SetActive(false);
+                    isUsingFlamethrower = false;
+                }
+                else
+                {
+                    flamethrowerInstance.GetComponent<Flamethrower>().offsetVector = new Vector3(flamethrowerOffset.x, flamethrowerOffset.y, -1);
+                    Willpower -= flamethrowerCost;
+                }
+            }
             // If the gun is being used
             if (isUsingGun)
             {
-                Debug.Log("Is using gun");
                 // Windup is still happening
                 if (gunWindup < gunWindupMax)
                 {
@@ -218,7 +238,6 @@ public class Player : AbstractFightingCharacter
     // Fires a single bullet from the gun
     private void ShootGun()
     {
-        Debug.Log("PEw pew");
         Vector3 bulletSpawnpoint = transform.position + new Vector3(bulletSpawnOffset.x, bulletSpawnOffset.y, 0);
         Bullet newBullet = Instantiate(bulletPrefab, bulletSpawnpoint, Quaternion.identity).GetComponent<Bullet>();
         newBullet.sender = gameObject;
