@@ -149,6 +149,8 @@ public class Player : AbstractFightingCharacter
 
         // Apply the movement force
         rigidBody.AddForce(moveForce);
+
+        rigidBody.velocity = Vector2.ClampMagnitude(rigidBody.velocity, 10);
     }
 
     // Checks the player's key presses and handles doing the appropriate attacks
