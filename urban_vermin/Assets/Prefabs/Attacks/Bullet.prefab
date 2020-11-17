@@ -129,7 +129,7 @@ MonoBehaviour:
   knockBack: 10
   direction: 0
   sender: {fileID: 0}
-  movespeed: 50
+  movespeed: 150
 --- !u!50 &7627756150375756627
 Rigidbody2D:
   serializedVersion: 4

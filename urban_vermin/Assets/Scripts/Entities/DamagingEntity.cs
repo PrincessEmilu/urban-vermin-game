@@ -10,10 +10,13 @@ public class DamagingEntity : MonoBehaviour
     public GameObject sender;
     protected Rigidbody2D rigidBody;
 
+    protected bool appliedDamage;
+
 
     protected virtual void Start()
     {
         rigidBody = gameObject.GetComponent<Rigidbody2D>();
+        appliedDamage = false;
     }
 
     //apply damage then delete this
@@ -32,7 +35,10 @@ public class DamagingEntity : MonoBehaviour
                 if (GetComponent<Collider2D>().IsTouching(obj.GetComponent<Collider2D>())) //if touching
                 {
                     if(obj != sender) //dont hit yourself
+                    {
                         obj.GetComponent<AbstractFightingCharacter>().TakeDamage(gameObject);
+                        appliedDamage = true;
+                    }
                 }
             }
         }

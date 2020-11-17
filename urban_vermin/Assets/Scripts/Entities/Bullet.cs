@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Bullet : DamagingEntity
 {
-    public float movespeed = 1000;
+    public float movespeed;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        rigidBody.AddForce(new Vector2(movespeed * direction, 0));
+    }
     protected override void Update()
     {
         base.Update();
 
-        rigidBody.AddForce(new Vector2(movespeed * direction, 0));
+        if (appliedDamage)
+            Destroy(gameObject);
     }
 }
