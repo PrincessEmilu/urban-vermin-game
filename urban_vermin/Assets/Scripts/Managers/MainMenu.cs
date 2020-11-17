@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private float sliderLevel;
 
     public void NextLevel ()
     {
@@ -29,14 +31,15 @@ public class MainMenu : MonoBehaviour
         menu.SetActive(!menu.activeSelf);
     }
 
-    public void ChangeAudio (float newVolume)
+    public void ChangeAudio (GameObject slider)
     {
+        sliderLevel = slider.GetComponent<Slider>().value;
         GameObject[] allObjects = FindObjectsOfType<GameObject>(); foreach (Object o in allObjects)
         foreach(GameObject oB in allObjects)
         {
             if(oB.GetComponent<AudioSource>() != null)
             {
-                oB.GetComponent<AudioSource>().volume = newVolume;
+                oB.GetComponent<AudioSource>().volume = sliderLevel;
             }
         }
     }
