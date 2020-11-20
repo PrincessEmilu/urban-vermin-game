@@ -21,9 +21,11 @@ public class Player : AbstractFightingCharacter
     // The direction this character is facing, 1 for the right, -1 for the left, 0 is unitialized
     private int direction = 0;
 
+    private const float velocityMax = 5.0f;
     private float walkSpeed;
     private float jumpForce;
 
+    private bool isWalking;
     private bool hasJump;
     private bool wasOnGroundLastFrame;
 
@@ -60,14 +62,14 @@ public class Player : AbstractFightingCharacter
     private const float maxWillpower = 100.0f;
     private const float willpowerRechargeRate = 0.25f;
 
-    private const int gunWindupMax = 30;
+    private const int gunWindupMax = 10;
     private const int gunActiveFramesMax = 10;
     private int gunWindup = 0;
     private int gunActiveFrames = 0;
 
-    private const int bashWindupMax = 100;
-    private const int staffActiveFramesMax = 10;
-    private int bashWindup = 0;
+    private const int staffWindupMax = 10;
+    private const int staffActiveFramesMax = 30;
+    private int staffWindupFrames = 0;
     private int staffActiveFrames = 0;
     #endregion
 
@@ -98,22 +100,24 @@ public class Player : AbstractFightingCharacter
 
         flamethrowerInstance.SetActive(false);
 
-        collider = gameObject.GetComponent<CapsuleCollider2D>();
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        collider = gameObject.GetComponent<BoxCollider2D>();
         contactFilter = new ContactFilter2D();
 
-        bulletSpawnOffset = new Vector2(1.0f, 0.0f);
-        flamethrowerOffset = new Vector2(2.0f, 0.0f);
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+        bulletSpawnOffset = new Vector2(1.5f, 0.9f);
+        flamethrowerOffset = new Vector2(2.75f, 0.5f);
 
         isUsingFlamethrower = false;
         isUsingGun = false;
         isUsingStaff = false;
 
+        isWalking = false;
         hasJump = true;
         wasOnGroundLastFrame = true;
         direction = 1;
-        walkSpeed = 7.50f;
-        jumpForce = 200.0f;
+        walkSpeed = 10.0f;
+        jumpForce = 1000.0f;
 
         health = 100;
         Ammo = maxAmmo;
@@ -123,8 +127,9 @@ public class Player : AbstractFightingCharacter
         if (bulletPrefab == null)
             Debug.LogError("No bullet prefab assigned to player!");
 
-        //if (flamePrefab == null)
-           //Debug.LogError("No flame prefab assigned to player!");
+        if (collider == null)
+           Debug.LogError("No collider assignhed to player!");
+
     }
 
     private void Update()
@@ -143,6 +148,9 @@ public class Player : AbstractFightingCharacter
         // Process keyboard input and manage attacks
         HandleAttacks();
 
+        // Handle animations
+        HandleSpriteChange();
+
         // Recharge willpower if not full or being used this frame
         if (Willpower < maxWillpower && !isUsingFlamethrower)
             Willpower += willpowerRechargeRate;
@@ -157,14 +165,20 @@ public class Player : AbstractFightingCharacter
         {
             direction = -1;
             moveForce.x = -walkSpeed;
+            isWalking = true;
         }
         else if (Input.GetKey(rightKey))
         {
             direction = 1;
             moveForce.x = walkSpeed;
+            isWalking = true;
+        }
+        else
+        {
+            isWalking = false;
         }
 
-        // Jump if available
+        // Jump, if available
         if (hasJump && Input.GetKeyDown(jumpKey))
         {
             hasJump = false;
@@ -174,7 +188,8 @@ public class Player : AbstractFightingCharacter
         // Apply the movement force
         rigidBody.AddForce(moveForce);
 
-        rigidBody.velocity = Vector2.ClampMagnitude(rigidBody.velocity, 10);
+        // Clamp velocity so Dresden doesn't go flying
+        rigidBody.velocity = Vector2.ClampMagnitude(rigidBody.velocity, velocityMax);
     }
 
     // Checks the player's key presses and handles doing the appropriate attacks
@@ -257,15 +272,21 @@ public class Player : AbstractFightingCharacter
             else if (isUsingStaff)
             {
                 // Windup is still happening
-                if (bashWindup < bashWindupMax)
+                if (staffWindupFrames < staffWindupMax)
                 {
-                    bashWindup++;
+                    staffWindupFrames++;
                 }
                 // Windup is done, attack is happening - staff swing happens continuously throughout the attack
                 else if (staffActiveFrames < staffActiveFramesMax)
                 {
                     SwingStaff();
                     staffActiveFrames++;
+                }
+                else
+                {
+                    staffActiveFrames = 0;
+                    staffWindupFrames = 0;
+                    isUsingStaff = false;
                 }
             }
         }
@@ -274,7 +295,7 @@ public class Player : AbstractFightingCharacter
     // Fires a single bullet from the gun
     private void ShootGun()
     {
-        Vector3 bulletSpawnpoint = transform.position + ( direction * new Vector3(bulletSpawnOffset.x, bulletSpawnOffset.y, 0));
+        Vector3 bulletSpawnpoint = transform.position + new Vector3(direction * bulletSpawnOffset.x, bulletSpawnOffset.y, 0);
 
         Bullet newBullet = Instantiate(bulletPrefab, bulletSpawnpoint, Quaternion.identity).GetComponent<Bullet>();
         newBullet.sender = gameObject;
@@ -288,6 +309,29 @@ public class Player : AbstractFightingCharacter
         Debug.Log("SWOOSH");
     }
 
+    // Changes the sprite based on what the player is doing currently
+    private void HandleSpriteChange()
+    {
+        if (isUsingGun)
+            spriteRenderer.sprite = gunSprite;
+        else if (isUsingFlamethrower)
+            spriteRenderer.sprite = flameSprite;
+        else if (isUsingStaff)
+            spriteRenderer.sprite = meleeSprite;
+        else if (isWalking)
+            spriteRenderer.sprite = walkSprite1;
+        else
+            spriteRenderer.sprite = idleSprite;
+
+        // TODO: Handle damaged animation
+
+        // Flip sprite based on direction
+        if (direction == -1)
+            spriteRenderer.flipX = true;
+        else
+            spriteRenderer.flipX = false;
+    }
+
     private void CheckGrounded()
     {
         // Give the player their jump back if they are touching the ground
@@ -298,8 +342,6 @@ public class Player : AbstractFightingCharacter
             {
                 if (collisions[i].gameObject.tag == "Ground")
                 {
-                    Debug.Log("Ground Touch!");
-
                     hasJump = true;
                 }
             }
