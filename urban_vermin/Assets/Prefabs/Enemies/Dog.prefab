@@ -71,7 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 27d5699508b477a458ce032e096c76fb, type: 3}
+  m_Sprite: {fileID: -1146434942223613854, guid: 431258efc0618314395b599c7be4d5b8,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,10 +98,11 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   hitboxPrefab: {fileID: 6888390933133943616, guid: a5392fd5693307041a05ae4a9d7462fc,
     type: 3}
+  health: 0
   sprites:
-  - {fileID: 21300000, guid: 27d5699508b477a458ce032e096c76fb, type: 3}
-  - {fileID: 21300000, guid: 9b09c58470a71904394ef208d31bda4e, type: 3}
-  - {fileID: 21300000, guid: 5eeb6c9fa01421047b4ff1f06401b04b, type: 3}
+  - {fileID: -1146434942223613854, guid: 431258efc0618314395b599c7be4d5b8, type: 3}
+  - {fileID: 1480917699468073914, guid: 431258efc0618314395b599c7be4d5b8, type: 3}
+  - {fileID: 9118213209582376027, guid: 431258efc0618314395b599c7be4d5b8, type: 3}
   speed: 2
   attackDistance: 1.8
   attackSpeed: 20
@@ -139,6 +141,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.22}
+  m_Offset: {x: 0, y: -1.15}
   m_Size: {x: 3.47, y: 2.56}
   m_Direction: 1
