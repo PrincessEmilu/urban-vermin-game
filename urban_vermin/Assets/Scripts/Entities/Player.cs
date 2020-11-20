@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,13 +17,7 @@ public class Player : AbstractFightingCharacter
     private const KeyCode fireKey = KeyCode.C;
     #endregion
 
-    public GameObject bulletPrefab;
-    public GameObject flamethrowerInstance;
-
-    // Offsets for spawning the player's attacks - essentially an offset from the prefab's center
-    private Vector2 bulletSpawnOffset;
-    private Vector2 flamethrowerOffset;
-
+    #region Movement Fields
     // The direction this character is facing, 1 for the right, -1 for the left, 0 is unitialized
     private int direction = 0;
 
@@ -34,8 +29,15 @@ public class Player : AbstractFightingCharacter
 
     private ContactFilter2D contactFilter;
     //if (playerCollider.OverlapCollider(contactFilter, collisions) > 0)
+    #endregion
 
     #region Attacking - Properties and Fields
+    public GameObject bulletPrefab;
+    public GameObject flamethrowerInstance;
+
+    // Offsets for spawning the player's attacks - essentially an offset from the prefab's center
+    private Vector2 bulletSpawnOffset;
+    private Vector2 flamethrowerOffset;
     public int Ammo { get; private set; }
     public float Willpower { get; private set; }
 
@@ -69,6 +71,27 @@ public class Player : AbstractFightingCharacter
     private int staffActiveFrames = 0;
     #endregion
 
+    #region Sprites
+    private SpriteRenderer spriteRenderer;
+
+    // TODO: Once all frames are in, this will need to be handled differently.
+    [SerializeField]
+    private Sprite gunSprite;
+    [SerializeField]
+    private Sprite meleeSprite;
+    [SerializeField]
+    private Sprite flameSprite;
+
+    [SerializeField]
+    private Sprite idleSprite;
+    [SerializeField]
+    private Sprite walkSprite1;
+    [SerializeField]
+    private Sprite walkSprite2;
+    [SerializeField]
+    private Sprite damageSprite;
+    #endregion
+
     public override void Start()
     {
         base.Start();
@@ -76,6 +99,7 @@ public class Player : AbstractFightingCharacter
         flamethrowerInstance.SetActive(false);
 
         collider = gameObject.GetComponent<CapsuleCollider2D>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         contactFilter = new ContactFilter2D();
 
         bulletSpawnOffset = new Vector2(1.0f, 0.0f);
