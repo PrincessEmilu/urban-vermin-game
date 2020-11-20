@@ -9,7 +9,10 @@ public class Flamethrower : DamagingEntity
     // Update is called once per frame
     protected override void Update()
     {
-        transform.position = sender.transform.position + (direction * offsetVector);
+        Vector3 newPosition = sender.transform.position;
+        newPosition.x += (direction * offsetVector.x);
+        newPosition.y += offsetVector.y;
+        transform.position = newPosition;
         base.Update();
     }
 }
