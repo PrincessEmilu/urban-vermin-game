@@ -227,6 +227,7 @@ public class Player : AbstractFightingCharacter
             // Flamethrower is being used
             if (isUsingFlamethrower)
             {
+                Debug.Log("Is using flamethrower");
                 // Stop using the flamethrower if out of willpower or key isn't being held
                 if (!Input.GetKey(fireKey) || Willpower == 0)
                 {
@@ -308,7 +309,7 @@ public class Player : AbstractFightingCharacter
     // Swings the staff over a period of time, has a hitbox "out"
     private void SwingStaff()
     {
-        Debug.Log("SWOOSH");
+        //Debug.Log("SWOOSH");
     }
 
     // Changes the sprite based on what the player is doing currently
