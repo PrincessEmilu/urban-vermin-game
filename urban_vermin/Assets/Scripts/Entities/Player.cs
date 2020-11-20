@@ -44,7 +44,7 @@ public class Player : AbstractFightingCharacter
     public float Willpower { get; private set; }
 
     public bool IsAttacking
-    { 
+    {
         get
         {
             return isUsingStaff || isUsingGun || isUsingFlamethrower;
@@ -71,6 +71,8 @@ public class Player : AbstractFightingCharacter
     private const int staffActiveFramesMax = 30;
     private int staffWindupFrames = 0;
     private int staffActiveFrames = 0;
+
+    public float getMaxWillpower() { return maxWillpower; }
     #endregion
 
     #region Sprites
