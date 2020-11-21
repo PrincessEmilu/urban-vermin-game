@@ -22,6 +22,7 @@ public class Boss : AbstractFightingCharacter
 
     void Update()
     {
+        stateTimer++;
         //behavior
         switch (state)
         {
@@ -72,7 +73,7 @@ public class Boss : AbstractFightingCharacter
                 {
                     Vector2 spawnPoint;
                     if (GetComponent<SpriteRenderer>().flipX) //offset hitbox to left or right
-                        spawnPoint = new Vector2(transform.position.x + 2.0f, transform.position.y);
+                        spawnPoint = new Vector2(transform.position.x + 1.0f, transform.position.y);
                     else
                         spawnPoint = new Vector2(transform.position.x - 2.0f, transform.position.y);
                     GameObject slamHitbox = Instantiate(slamPrefab, spawnPoint, Quaternion.identity);
@@ -94,12 +95,12 @@ public class Boss : AbstractFightingCharacter
                 if (stateTimer == 1)
                 {
                     //throw
-                    GameObject throwHitbox = Instantiate(throwPrefab, transform.position, Quaternion.identity);
-                    throwHitbox.GetComponent<DamagingEntity>().sender = gameObject;
+                    Vector3 spawn = new Vector3(transform.position.x, transform.position.y + 1.0f, 0.5f);
+                    GameObject throwHitbox = Instantiate(throwPrefab, spawn, Quaternion.identity);
                     if (GetComponent<SpriteRenderer>().flipX) //set direction of hitbox
-                        throwHitbox.GetComponent<DamagingEntity>().direction = 1;
+                        throwHitbox.GetComponent<BossProjectile>().direction = 1;
                     else
-                        throwHitbox.GetComponent<DamagingEntity>().direction = -1;
+                        throwHitbox.GetComponent<BossProjectile>().direction = -1;
                 }
                 if (stateTimer >= 30)
                 {
@@ -126,7 +127,6 @@ public class Boss : AbstractFightingCharacter
                 }
                 break;
         }
-        stateTimer++;
 
         //keep entity upright
         rigidBody.MoveRotation(Quaternion.LookRotation(transform.forward, Vector3.up));

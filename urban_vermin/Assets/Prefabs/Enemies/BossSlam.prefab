@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7452377333353569236}
   - component: {fileID: 2250566350964140484}
   m_Layer: 0
-  m_Name: Hitbox
+  m_Name: BossSlam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 4}
   m_EdgeRadius: 0
 --- !u!114 &7452377333353569236
 MonoBehaviour:
@@ -73,6 +73,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   knockBack: 75
+  direction: 0
+  sender: {fileID: 0}
 --- !u!50 &2250566350964140484
 Rigidbody2D:
   serializedVersion: 4
