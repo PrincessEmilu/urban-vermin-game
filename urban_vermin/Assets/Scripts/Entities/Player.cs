@@ -23,6 +23,7 @@ public class Player : AbstractFightingCharacter
 
     private const float velocityMax = 5.0f;
     private float walkSpeed;
+    private const float walkSpeedMax = 10.0f;
     private float jumpForce;
 
     private bool isWalking;
@@ -35,7 +36,9 @@ public class Player : AbstractFightingCharacter
 
     #region Attacking - Properties and Fields
     public GameObject bulletPrefab;
+    public GameObject fireballPrefab;
     public GameObject flamethrowerInstance;
+    public GameObject staffInstance;
 
     // Offsets for spawning the player's attacks - essentially an offset from the prefab's center
     private Vector2 bulletSpawnOffset;
@@ -56,7 +59,7 @@ public class Player : AbstractFightingCharacter
     private bool isUsingStaff;
 
     // Willpower cost per frame
-    private float flamethrowerCost = 0.1f;
+    private float flamethrowerCost = 0.2f;
 
     private const int maxAmmo = 24;
     private const float maxWillpower = 100.0f;
@@ -68,9 +71,9 @@ public class Player : AbstractFightingCharacter
     private int gunActiveFrames = 0;
 
     private const int staffWindupMax = 10;
-    private const int staffActiveFramesMax = 30;
+    private const int staffActiveFramesMax = 10;
     private int staffWindupFrames = 0;
-    private int staffActiveFrames = 0;
+    private int staffActiveFrames = 10;
 
     public float getMaxWillpower() { return maxWillpower; }
     #endregion
@@ -101,6 +104,8 @@ public class Player : AbstractFightingCharacter
         base.Start();
 
         flamethrowerInstance.SetActive(false);
+        staffInstance.SetActive(false);
+        staffInstance.GetComponent<DamagingEntity>().sender = gameObject;
 
         collider = gameObject.GetComponent<BoxCollider2D>();
         contactFilter = new ContactFilter2D();
@@ -108,7 +113,7 @@ public class Player : AbstractFightingCharacter
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         bulletSpawnOffset = new Vector2(1.5f, 0.9f);
-        flamethrowerOffset = new Vector2(2.75f, 0.5f);
+        flamethrowerOffset = new Vector2(1.74f, 0.67f);
 
         isUsingFlamethrower = false;
         isUsingGun = false;
@@ -118,7 +123,7 @@ public class Player : AbstractFightingCharacter
         hasJump = true;
         wasOnGroundLastFrame = true;
         direction = 1;
-        walkSpeed = 10.0f;
+        walkSpeed = walkSpeedMax;
         jumpForce = 1000.0f;
 
         health = 100;
@@ -203,20 +208,26 @@ public class Player : AbstractFightingCharacter
             // First press of the firespell key
             if (Input.GetKeyDown(fireKey))
             {
-                isUsingFlamethrower = true;
+                if (Willpower <= 0)
+                    return;
 
+                isUsingFlamethrower = true;
+                walkSpeed = walkSpeedMax / 2;
                 flamethrowerInstance.SetActive(true);
                 Flamethrower flameThrowerScript = flamethrowerInstance.GetComponent<Flamethrower>();
+                flameThrowerScript.offsetVector = flamethrowerOffset;
                 flameThrowerScript.direction = direction;
             }
             // First press of the gun
             else if (!isUsingGun && Input.GetKeyDown(gunKey))
             {
+                walkSpeed = walkSpeedMax / 5;
                 isUsingGun = true;
             }
             // First swing of the staff
             else if (Input.GetKeyDown(bashKey))
             {
+                walkSpeed = walkSpeedMax / 5;
                 isUsingStaff = true;
             }
         }
@@ -227,9 +238,8 @@ public class Player : AbstractFightingCharacter
             // Flamethrower is being used
             if (isUsingFlamethrower)
             {
-                Debug.Log("Is using flamethrower");
                 // Stop using the flamethrower if out of willpower or key isn't being held
-                if (!Input.GetKey(fireKey) || Willpower == 0)
+                if (!Input.GetKey(fireKey) || Willpower <= 0)
                 {
                     flamethrowerInstance.SetActive(false);
                     isUsingFlamethrower = false;
@@ -237,8 +247,8 @@ public class Player : AbstractFightingCharacter
                 else
                 {
                     Flamethrower flameThrowerScript = flamethrowerInstance.GetComponent<Flamethrower>();
-                    flameThrowerScript.offsetVector = new Vector3(flamethrowerOffset.x, flamethrowerOffset.y, -1);
                     Willpower -= flamethrowerCost;
+                    walkSpeed = walkSpeedMax;
                 }
             }
             // If the gun is being used
@@ -248,8 +258,6 @@ public class Player : AbstractFightingCharacter
                 if (gunWindup < gunWindupMax)
                 {
                     gunWindup++;
-
-                    // TODO: Animation stuff, presumably
                 }
                 // Windup done, shoot the gun
                 else if (gunActiveFrames == 0)
@@ -261,8 +269,6 @@ public class Player : AbstractFightingCharacter
                 else if (gunActiveFrames < gunActiveFramesMax)
                 {
                     gunActiveFrames++;
-
-                    // TODO: Animation stuff, presumably
                 }
                 // Attack animation is totally done, reset for next attack
                 else
@@ -270,6 +276,7 @@ public class Player : AbstractFightingCharacter
                     gunActiveFrames = 0;
                     gunWindup = 0;
                     isUsingGun = false;
+                    walkSpeed = walkSpeedMax;
                 }
             }
             else if (isUsingStaff)
@@ -280,16 +287,22 @@ public class Player : AbstractFightingCharacter
                     staffWindupFrames++;
                 }
                 // Windup is done, attack is happening - staff swing happens continuously throughout the attack
-                else if (staffActiveFrames < staffActiveFramesMax)
+                else if (staffActiveFrames == 0)
                 {
                     SwingStaff();
+                    staffActiveFrames++;
+                }
+                else if (staffActiveFrames < staffActiveFramesMax)
+                {
                     staffActiveFrames++;
                 }
                 else
                 {
                     staffActiveFrames = 0;
                     staffWindupFrames = 0;
+                    staffInstance.SetActive(false);
                     isUsingStaff = false;
+                    walkSpeed = walkSpeedMax;
                 }
             }
         }
@@ -309,7 +322,7 @@ public class Player : AbstractFightingCharacter
     // Swings the staff over a period of time, has a hitbox "out"
     private void SwingStaff()
     {
-        //Debug.Log("SWOOSH");
+        staffInstance.SetActive(true);
     }
 
     // Changes the sprite based on what the player is doing currently

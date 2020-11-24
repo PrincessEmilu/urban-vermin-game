@@ -98,7 +98,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   hitboxPrefab: {fileID: 6888390933133943616, guid: a5392fd5693307041a05ae4a9d7462fc,
     type: 3}
-  health: 0
+  health: 50
   sprites:
   - {fileID: -1146434942223613854, guid: 431258efc0618314395b599c7be4d5b8, type: 3}
   - {fileID: 1480917699468073914, guid: 431258efc0618314395b599c7be4d5b8, type: 3}
@@ -106,7 +106,7 @@ MonoBehaviour:
   speed: 2
   attackDistance: 1.8
   attackSpeed: 20
-  swingDistance: 0.95
+  swingDistance: 2
 --- !u!50 &4516717257869819961
 Rigidbody2D:
   serializedVersion: 4

@@ -7,6 +7,8 @@ public class DamagingEntity : MonoBehaviour
     public float damage;
     public float knockBack;
     public int direction = 0;
+    public bool destroyOnApplyDamage = false;
+    public bool disableOnApplyDamage = false;
     public GameObject sender;
     protected Rigidbody2D rigidBody;
 
@@ -34,7 +36,7 @@ public class DamagingEntity : MonoBehaviour
             {
                 if (GetComponent<Collider2D>().IsTouching(obj.GetComponent<Collider2D>())) //if touching
                 {
-                    if(obj != sender) //dont hit yourself
+                    if (obj != sender) //dont hit yourself
                     {
                         obj.GetComponent<AbstractFightingCharacter>().TakeDamage(gameObject);
                         appliedDamage = true;
@@ -43,8 +45,13 @@ public class DamagingEntity : MonoBehaviour
             }
         }
 
-        //delete this
-        //Destroy(this.gameObject);
+        if (appliedDamage)
+        {
+            if (destroyOnApplyDamage)
+                Destroy(gameObject);
+            else if (disableOnApplyDamage)
+                gameObject.SetActive(false);
+        }
     }
 
 }
