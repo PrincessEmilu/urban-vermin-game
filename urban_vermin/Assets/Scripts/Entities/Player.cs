@@ -40,6 +40,9 @@ public class Player : AbstractFightingCharacter
     public GameObject flamethrowerInstance;
     public GameObject staffInstance;
 
+    public AudioClip gunshotSound;
+    public AudioClip meleeSound;
+
     // Offsets for spawning the player's attacks - essentially an offset from the prefab's center
     private Vector2 bulletSpawnOffset;
     private Vector2 flamethrowerOffset;

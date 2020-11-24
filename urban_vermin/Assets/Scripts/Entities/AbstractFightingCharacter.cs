@@ -16,6 +16,10 @@ public abstract class AbstractFightingCharacter : MonoBehaviour
     public virtual void Start()
     {
         rigidBody = gameObject.GetComponent<Rigidbody2D>();
+        gameManager = GameObject.FindGameObjectsWithTag("GameManager")[0].GetComponent<GameManager>();
+
+        if (gameManager == null)
+            Debug.LogError("GameManager not found!");
     }
 
     public virtual void TakeDamage(GameObject damagingObject)
