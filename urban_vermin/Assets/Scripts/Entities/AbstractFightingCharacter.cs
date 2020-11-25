@@ -11,7 +11,7 @@ public abstract class AbstractFightingCharacter : MonoBehaviour
 
     public float health;
     protected Rigidbody2D rigidBody;
-    protected Collider2D collider;
+    protected Collider2D colliderObj;
 
     public virtual void Start()
     {

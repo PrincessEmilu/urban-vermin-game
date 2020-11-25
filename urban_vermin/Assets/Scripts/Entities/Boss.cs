@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss : AbstractFightingCharacter
 {
-    private GameObject player;
+    public GameObject player;
 
     public enum State { IDLE, JUMP, WALK, THROW, SLAM, CHARGINGSLAM, CHARGINGTHROW }
     public State state = State.IDLE;

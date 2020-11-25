@@ -110,7 +110,7 @@ public class Player : AbstractFightingCharacter
         staffInstance.SetActive(false);
         staffInstance.GetComponent<DamagingEntity>().sender = gameObject;
 
-        collider = gameObject.GetComponent<BoxCollider2D>();
+        colliderObj = gameObject.GetComponent<BoxCollider2D>();
         contactFilter = new ContactFilter2D();
 
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -137,7 +137,7 @@ public class Player : AbstractFightingCharacter
         if (bulletPrefab == null)
             Debug.LogError("No bullet prefab assigned to player!");
 
-        if (collider == null)
+        if (colliderObj == null)
            Debug.LogError("No collider assignhed to player!");
 
     }
@@ -355,7 +355,7 @@ public class Player : AbstractFightingCharacter
     {
         // Give the player their jump back if they are touching the ground
         List<Collider2D> collisions = new List<Collider2D>();
-        if (collider.GetContacts(collisions) > 0)
+        if (colliderObj.GetContacts(collisions) > 0)
         {
             for (int i = 0; i < collisions.Count; i++)
             {
