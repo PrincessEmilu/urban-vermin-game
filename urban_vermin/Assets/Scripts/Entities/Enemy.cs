@@ -23,6 +23,8 @@ public class Enemy : AbstractFightingCharacter
     {
         base.Start();
         player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+            Debug.LogError("Fuck");
     }
 
     void Update()
