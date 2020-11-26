@@ -11,12 +11,19 @@ public class UIScript : MonoBehaviour
     [SerializeField]
     private GameObject uIBullet;
     private int bulletCount = 0;
-    private float offset = 10f;
+    private const float offset = 15f;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         playerS = GameObject.FindWithTag("Player").GetComponent<Player>();
+
+        for (int i = 0; i < playerS.MaxAmmo; i++)
+        {
+            GameObject bullet = Instantiate(uIBullet, GameObject.Find("BulletOrigin").transform);
+            bullet.GetComponent<RectTransform>().localPosition += new Vector3(offset * i, 0, 0);
+            bulletCount++;
+        }
     }
 
     // Update is called once per frame
@@ -33,14 +40,12 @@ public class UIScript : MonoBehaviour
         //Bullets
         if(playerS.Ammo > bulletCount)
         {
-            GameObject bullet = Instantiate(uIBullet, GameObject.Find("BulletOrigin").transform);
-            //bullet.GetComponent<RectTransform>().localPosition = Vector3.zero;
-            bullet.GetComponent<RectTransform>().localPosition += new Vector3(offset * GameObject.Find("BulletOrigin").transform.childCount, 0, 0);
+            GameObject.Find("BulletOrigin").transform.GetChild(bulletCount - 1).GetComponent<Image>().color = Color.white;
             bulletCount += 1;
         }
         else if (playerS.Ammo < bulletCount)
         {
-            Destroy(GameObject.Find("BulletOrigin").transform.GetChild(GameObject.Find("BulletOrigin").transform.childCount));
+            GameObject.Find("BulletOrigin").transform.GetChild(bulletCount - 1).GetComponent<Image>().color = Color.black;
             bulletCount -= 1;
         }
     }

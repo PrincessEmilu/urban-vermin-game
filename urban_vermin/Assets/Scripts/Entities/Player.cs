@@ -47,6 +47,7 @@ public class Player : AbstractFightingCharacter
     private Vector2 bulletSpawnOffset;
     private Vector2 flamethrowerOffset;
     public int Ammo { get; private set; }
+    public int MaxAmmo { get { return maxAmmo; } }
     public float Willpower { get; private set; }
 
     public bool IsAttacking
@@ -64,7 +65,7 @@ public class Player : AbstractFightingCharacter
     // Willpower cost per frame
     private float flamethrowerCost = 0.2f;
 
-    private const int maxAmmo = 24;
+    private const int maxAmmo = 16;
     private const float maxWillpower = 100.0f;
     private const float willpowerRechargeRate = 0.25f;
 
@@ -222,7 +223,7 @@ public class Player : AbstractFightingCharacter
                 flameThrowerScript.direction = direction;
             }
             // First press of the gun
-            else if (!isUsingGun && Input.GetKeyDown(gunKey))
+            else if (!isUsingGun && Ammo > 0 && Input.GetKeyDown(gunKey))
             {
                 walkSpeed = walkSpeedMax / 5;
                 isUsingGun = true;
@@ -314,6 +315,8 @@ public class Player : AbstractFightingCharacter
     // Fires a single bullet from the gun
     private void ShootGun()
     {
+        Ammo--;
+
         Vector3 bulletSpawnpoint = transform.position + new Vector3(direction * bulletSpawnOffset.x, bulletSpawnOffset.y, 0);
 
         Bullet newBullet = Instantiate(bulletPrefab, bulletSpawnpoint, Quaternion.identity).GetComponent<Bullet>();
