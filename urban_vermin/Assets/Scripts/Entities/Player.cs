@@ -251,6 +251,7 @@ public class Player : AbstractFightingCharacter
                 else
                 {
                     Flamethrower flameThrowerScript = flamethrowerInstance.GetComponent<Flamethrower>();
+                    flameThrowerScript.direction = direction;
                     Willpower -= flamethrowerCost;
                     walkSpeed = walkSpeedMax;
                 }

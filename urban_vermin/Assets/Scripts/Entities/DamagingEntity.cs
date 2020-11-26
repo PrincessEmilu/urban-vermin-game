@@ -28,13 +28,26 @@ public class DamagingEntity : MonoBehaviour
         if (direction == 0)
             return;
 
+        CheckForDamage(GetComponent<Collider2D>());
+
+        if (appliedDamage)
+        {
+            if (destroyOnApplyDamage)
+                Destroy(gameObject);
+            else if (disableOnApplyDamage)
+                gameObject.SetActive(false);
+        }
+    }
+
+    protected void CheckForDamage(Collider2D collider)
+    {
         //check for hits
         GameObject[] allObjs = FindObjectsOfType<GameObject>();
         foreach (GameObject obj in allObjs)
         {
             if (obj.GetComponent<AbstractFightingCharacter>() != null) //only check enemies/player
             {
-                if (GetComponent<Collider2D>().IsTouching(obj.GetComponent<Collider2D>())) //if touching
+                if (collider.IsTouching(obj.GetComponent<Collider2D>())) //if touching
                 {
                     if (obj != sender) //dont hit yourself
                     {
@@ -43,14 +56,6 @@ public class DamagingEntity : MonoBehaviour
                     }
                 }
             }
-        }
-
-        if (appliedDamage)
-        {
-            if (destroyOnApplyDamage)
-                Destroy(gameObject);
-            else if (disableOnApplyDamage)
-                gameObject.SetActive(false);
         }
     }
 

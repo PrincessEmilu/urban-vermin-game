@@ -1,7 +1,7 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!60 &3570193589367713394
-PolygonCollider2D:
+--- !u!61 &4321393588056582762
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -13,7 +13,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 43.63629, y: 9.337149}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -23,13 +23,61 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 74.677956, y: 33.391483}
-      - {x: -0.27902377, y: 0.13218358}
-      - {x: 29.775248, y: -2.8738973}
-      - {x: 90.82045, y: -1.6155921}
-      - {x: 89.848, y: 25.083231}
+  serializedVersion: 2
+  m_Size: {x: 24.739529, y: 26.30058}
+  m_EdgeRadius: 0
+--- !u!61 &4607762553867074866
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706508282381336406}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 14.811239, y: 3.9490137}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 31.935436, y: 16.244375}
+  m_EdgeRadius: 0
+--- !u!61 &6065648628390958400
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706508282381336406}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 70.74675, y: 14.057373}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 31.422028, y: 39.483223}
+  m_EdgeRadius: 0
 --- !u!114 &5282819720640496781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,6 +97,9 @@ MonoBehaviour:
   disableOnApplyDamage: 0
   sender: {fileID: 8419784991872961549}
   offsetVector: {x: 0, y: 0, z: 0}
+  nearCollider: {fileID: 4607762553867074866}
+  midCollider: {fileID: 4321393588056582762}
+  farCollider: {fileID: 6065648628390958400}
 --- !u!1 &8419784991872961549
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,6 +206,8 @@ MonoBehaviour:
     type: 3}
   flamethrowerInstance: {fileID: 4706508282381336406}
   staffInstance: {fileID: 2997106612772538093}
+  gunshotSound: {fileID: 0}
+  meleeSound: {fileID: 0}
   gunSprite: {fileID: -4065260147618722494, guid: 93883f021f0533342886246cea8ced7f,
     type: 3}
   meleeSprite: {fileID: -3771753937956194462, guid: 93883f021f0533342886246cea8ced7f,
@@ -324,21 +377,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8419784991872961548}
     m_Modifications:
-    - target: {fileID: -4880036927844719497, guid: 78468e48c03ea0d47b12ef0b845a9212,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.64542687
-      objectReference: {fileID: 0}
-    - target: {fileID: -4880036927844719497, guid: 78468e48c03ea0d47b12ef0b845a9212,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 2.2908535
-      objectReference: {fileID: 0}
-    - target: {fileID: -4880036927844719497, guid: 78468e48c03ea0d47b12ef0b845a9212,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 449706030765282066, guid: 78468e48c03ea0d47b12ef0b845a9212,
         type: 3}
       propertyPath: m_Name
@@ -398,6 +436,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4880036927844719497, guid: 78468e48c03ea0d47b12ef0b845a9212,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.64542687
+      objectReference: {fileID: 0}
+    - target: {fileID: -4880036927844719497, guid: 78468e48c03ea0d47b12ef0b845a9212,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2.2908535
+      objectReference: {fileID: 0}
+    - target: {fileID: -4880036927844719497, guid: 78468e48c03ea0d47b12ef0b845a9212,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6597978502018826817, guid: 78468e48c03ea0d47b12ef0b845a9212,
         type: 3}
