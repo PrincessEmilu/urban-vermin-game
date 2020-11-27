@@ -18,11 +18,13 @@ public class Enemy : AbstractFightingCharacter
     public int attackSpeed;
     public float swingDistance;
 
+    public AudioClip attackAudio;
 
     void Start()
     {
         base.Start();
         player = GameObject.FindGameObjectWithTag("Player");
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -52,6 +54,7 @@ public class Enemy : AbstractFightingCharacter
                     attackHitbox.GetComponent<DamagingEntity>().direction = -1;
 
                 setSprite(2);
+                gameManager.GetComponent<AudioManager>().PlaySFX(attackAudio);
             }
 
             //end attack
