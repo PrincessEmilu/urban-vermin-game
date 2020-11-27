@@ -9,12 +9,16 @@ public class AudioManager : MonoBehaviour
     private float sfxVolume;
 
     [SerializeField]
+    private AudioClip musicBackground;
+
+
+    [SerializeField]
     private Slider musicSlider;
     [SerializeField]
     private Slider sfxSlider;
 
     [SerializeField]
-    private AudioSource sfxSource;
+    public AudioSource sfxSource;
     [SerializeField]
     private AudioSource musicSource;
 
@@ -48,6 +52,7 @@ public class AudioManager : MonoBehaviour
         // Add listeners to the sliders and invokes a method when the value changes.
         musicSlider.onValueChanged.AddListener(delegate { SetMusicVolume(); });
         sfxSlider.onValueChanged.AddListener(delegate { SetSFXVolume(); });
+        PlayMusic(musicBackground);
     }
 
     public void SetSFXVolume()

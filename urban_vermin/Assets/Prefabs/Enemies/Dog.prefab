@@ -107,6 +107,7 @@ MonoBehaviour:
   attackDistance: 1.8
   attackSpeed: 20
   swingDistance: 2
+  attackAudio: {fileID: 8300000, guid: 86b999f3e0ea38741b4dc45a5af9897a, type: 3}
 --- !u!50 &4516717257869819961
 Rigidbody2D:
   serializedVersion: 4

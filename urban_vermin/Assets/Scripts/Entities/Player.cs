@@ -42,6 +42,7 @@ public class Player : AbstractFightingCharacter
 
     public AudioClip gunshotSound;
     public AudioClip meleeSound;
+    public AudioClip fireSound;
 
     // Offsets for spawning the player's attacks - essentially an offset from the prefab's center
     private Vector2 bulletSpawnOffset;
@@ -221,18 +222,21 @@ public class Player : AbstractFightingCharacter
                 Flamethrower flameThrowerScript = flamethrowerInstance.GetComponent<Flamethrower>();
                 flameThrowerScript.offsetVector = flamethrowerOffset;
                 flameThrowerScript.direction = direction;
+                GameObject.Find("GameManager").GetComponent<AudioManager>().sfxSource.Play();
             }
             // First press of the gun
             else if (!isUsingGun && Ammo > 0 && Input.GetKeyDown(gunKey))
             {
                 walkSpeed = walkSpeedMax / 5;
                 isUsingGun = true;
+                GameObject.Find("GameManager").GetComponent<AudioManager>().PlaySFX(gunshotSound);
             }
             // First swing of the staff
             else if (Input.GetKeyDown(bashKey))
             {
                 walkSpeed = walkSpeedMax / 5;
                 isUsingStaff = true;
+                GameObject.Find("GameManager").GetComponent<AudioManager>().PlaySFX(meleeSound);
             }
         }
 
@@ -247,6 +251,7 @@ public class Player : AbstractFightingCharacter
                 {
                     flamethrowerInstance.SetActive(false);
                     isUsingFlamethrower = false;
+                    GameObject.Find("GameManager").GetComponent<AudioManager>().sfxSource.Stop();
                 }
                 else
                 {
