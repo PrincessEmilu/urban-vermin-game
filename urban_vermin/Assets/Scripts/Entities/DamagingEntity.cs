@@ -56,6 +56,18 @@ public class DamagingEntity : MonoBehaviour
                     }
                 }
             }
+
+            if (gameObject.tag == "PlayerMelee") //this is player melee
+            {
+                if (obj.GetComponent<BossProjectile>() != null) //destroy boss projectile
+                {
+                    if (collider.IsTouching(obj.GetComponent<Collider2D>())) //if touching
+                    {
+                        Debug.Log("Deflected");
+                        Destroy(obj);
+                    }
+                }
+            }
         }
     }
 
