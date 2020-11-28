@@ -63,7 +63,7 @@ public class DamagingEntity : MonoBehaviour
                 {
                     if (collider.IsTouching(obj.GetComponent<Collider2D>())) //if touching
                     {
-                        Debug.Log("Deflected");
+                        Debug.Log("Destroyed");
                         Destroy(obj);
                     }
                 }
