@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyEnabler : MonoBehaviour
 {
     public GameObject enemyToEnable;
+    public bool lockScreen; //if true, stop camera movement when this is triggered (for boss level)
 
     void Start()
     {
@@ -17,6 +18,12 @@ public class EnemyEnabler : MonoBehaviour
         {
             enemyToEnable.gameObject.SetActive(true);
             Destroy(gameObject);
+            if(lockScreen)
+            {
+                Camera cam = FindObjectOfType<Camera>();
+                cam.GetComponent<CameraMovement>().location = cam.transform.position.x;
+                cam.GetComponent<CameraMovement>().isFixed = true;
+            }
         }
     }
 }

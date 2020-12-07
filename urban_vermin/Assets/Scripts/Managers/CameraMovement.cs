@@ -5,19 +5,19 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public GameObject lookAt;
-    public int maxX;
-    public bool isTutorial; //If true, interpolates on location, else looksat between 0 and maxX
-    public int location;
+    public float minX = 0, maxX;
+    public bool isFixed;
+    public float location;
 
     void Update()
     {
-        if (isTutorial)
+        if (isFixed)
         {
             transform.position = new Vector3(location, 0, -10);
         }
         else
         {
-            float xPos = Mathf.Max(lookAt.transform.position.x, 0.0f);
+            float xPos = Mathf.Max(lookAt.transform.position.x, minX);
             xPos = Mathf.Min(xPos, maxX);
             transform.position = new Vector3(xPos, 0, -10);
         }

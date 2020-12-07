@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss : AbstractFightingCharacter
 {
     public GameObject player;
+    public bool entranceAnimation = true;
+    public GameObject healthBar;
 
     public enum State { IDLE, JUMP, WALK, THROW, SLAM, CHARGINGSLAM, CHARGINGTHROW }
     public State state = State.IDLE;
@@ -18,10 +21,24 @@ public class Boss : AbstractFightingCharacter
     {
         base.Start();
         player = GameObject.FindGameObjectWithTag("Player");
+        healthBar.SetActive(false);
     }
 
     void Update()
     {
+        if (entranceAnimation)
+        {
+            if (transform.position.y > 0)
+                return;
+            else
+            {
+                healthBar.SetActive(true);
+                entranceAnimation = false;
+            }
+        }
+
+        healthBar.transform.GetChild(0).GetComponent<Image>().fillAmount = health / 500.0f;
+
         stateTimer++;
         //behavior
         switch (state)
