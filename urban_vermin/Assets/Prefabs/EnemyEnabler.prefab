@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2627263567679021463}
   - component: {fileID: 2627263567679021460}
   - component: {fileID: 2627263567679021461}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EnemyEnabler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,3 +71,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToEnable: {fileID: 0}
+  lockScreen: 0

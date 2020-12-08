@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Boss : AbstractFightingCharacter
 {
     public GameObject player;
     public bool entranceAnimation = true;
+    public float dying = -1.0f;
     public GameObject healthBar;
 
     public enum State { IDLE, JUMP, WALK, THROW, SLAM, CHARGINGSLAM, CHARGINGTHROW }
@@ -26,6 +28,18 @@ public class Boss : AbstractFightingCharacter
 
     void Update()
     {
+        if(dying > -1.0f)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, dying);
+            if (dying <= 0)
+                SceneManager.LoadScene("VictoryScene");
+            else
+            {
+                dying -= 0.01f;
+                return;
+            }
+        }
+
         if (entranceAnimation)
         {
             if (transform.position.y > 0)
@@ -147,6 +161,12 @@ public class Boss : AbstractFightingCharacter
 
         //keep entity upright
         rigidBody.MoveRotation(Quaternion.LookRotation(transform.forward, Vector3.up));
+
+        //check for death
+        if(health <= 0)
+        {
+            dying = 1.0f;
+        }
     }
 
     protected override void ApplyKnockback(float knockBack, int direction)

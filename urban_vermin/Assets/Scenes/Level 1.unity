@@ -1237,8 +1237,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookAt: {fileID: 2062925649}
+  minX: 0
   maxX: 132
-  isTutorial: 0
+  isFixed: 0
   location: 0
 --- !u!1 &1045045295
 GameObject:
@@ -2744,6 +2745,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyEnabler (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627263567679021458, guid: e0d47b240d4e23e47acccd66dbc31a3f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2627263567679021463, guid: e0d47b240d4e23e47acccd66dbc31a3f,
         type: 3}
@@ -4533,6 +4539,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyEnabler
       objectReference: {fileID: 0}
+    - target: {fileID: 2627263567679021458, guid: e0d47b240d4e23e47acccd66dbc31a3f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 2627263567679021463, guid: e0d47b240d4e23e47acccd66dbc31a3f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4593,6 +4604,11 @@ PrefabInstance:
       propertyPath: enemyToEnable
       value: 
       objectReference: {fileID: 511369544}
+    - target: {fileID: 2627263567679021460, guid: e0d47b240d4e23e47acccd66dbc31a3f,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0d47b240d4e23e47acccd66dbc31a3f, type: 3}
 --- !u!1001 &3856171407896259370
