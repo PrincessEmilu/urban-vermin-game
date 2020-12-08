@@ -51,7 +51,7 @@ public class Boss : AbstractFightingCharacter
             }
         }
 
-        healthBar.transform.GetChild(0).GetComponent<Image>().fillAmount = health / 500.0f;
+        healthBar.transform.GetChild(0).GetComponent<Image>().fillAmount = health / 1500.0f;
 
         stateTimer++;
         //behavior
