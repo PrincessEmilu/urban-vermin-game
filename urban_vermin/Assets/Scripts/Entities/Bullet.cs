@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : DamagingEntity
 {
     public float movespeed;
+    private int lifeTime = 0;
 
     protected override void Start()
     {
@@ -18,5 +19,9 @@ public class Bullet : DamagingEntity
 
         if (appliedDamage)
             Destroy(gameObject);
+
+        if (lifeTime > 30)
+            Destroy(gameObject);
+        lifeTime++;
     }
 }

@@ -23,7 +23,7 @@ public class Player : AbstractFightingCharacter
 
     private const float velocityMax = 5.0f;
     private float walkSpeed;
-    private const float walkSpeedMax = 10.0f;
+    private const float walkSpeedMax = 50.0f;
     private float jumpForce;
 
     private bool isWalking;
@@ -145,7 +145,7 @@ public class Player : AbstractFightingCharacter
         wasOnGroundLastFrame = true;
         direction = 1;
         walkSpeed = walkSpeedMax;
-        jumpForce = 1000.0f;
+        jumpForce = 4000.0f;
 
         health = 100;
         Ammo = maxAmmo;
