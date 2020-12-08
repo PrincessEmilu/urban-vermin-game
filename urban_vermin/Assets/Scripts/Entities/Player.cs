@@ -238,21 +238,21 @@ public class Player : AbstractFightingCharacter
                 Flamethrower flameThrowerScript = flamethrowerInstance.GetComponent<Flamethrower>();
                 flameThrowerScript.offsetVector = flamethrowerOffset;
                 flameThrowerScript.direction = direction;
-                GameObject.Find("GameManager").GetComponent<AudioManager>().sfxSource.Play();
+                gameManager.GetComponent<AudioManager>().PlaySFX(fireSound);
             }
             // First press of the gun
             else if (!isUsingGun && Ammo > 0 && Input.GetKeyDown(gunKey))
             {
                 walkSpeed = walkSpeedMax / 5;
                 isUsingGun = true;
-                GameObject.Find("GameManager").GetComponent<AudioManager>().PlaySFX(gunshotSound);
+                gameManager.GetComponent<AudioManager>().PlaySFX(gunshotSound);
             }
             // First swing of the staff
             else if (Input.GetKeyDown(bashKey))
             {
                 walkSpeed = walkSpeedMax / 5;
                 isUsingStaff = true;
-                GameObject.Find("GameManager").GetComponent<AudioManager>().PlaySFX(meleeSound);
+                gameManager.GetComponent<AudioManager>().PlaySFX(meleeSound);
             }
         }
 

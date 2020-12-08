@@ -43,15 +43,15 @@ public class AudioManager : MonoBehaviour
             musicVolume = PlayerPrefs.GetFloat("musicVolume");
             sfxVolume = PlayerPrefs.GetFloat("sfxVolume");
 
-            musicSlider.SetValueWithoutNotify(musicVolume);
-            sfxSlider.SetValueWithoutNotify(sfxVolume);
+            //musicSlider.SetValueWithoutNotify(musicVolume);
+            //sfxSlider.SetValueWithoutNotify(sfxVolume);
 
             musicSource.volume = musicVolume;
         }
 
         // Add listeners to the sliders and invokes a method when the value changes.
-        musicSlider.onValueChanged.AddListener(delegate { SetMusicVolume(); });
-        sfxSlider.onValueChanged.AddListener(delegate { SetSFXVolume(); });
+        //musicSlider.onValueChanged.AddListener(delegate { SetMusicVolume(); });
+        //sfxSlider.onValueChanged.AddListener(delegate { SetSFXVolume(); });
         PlayMusic(musicBackground);
     }
 

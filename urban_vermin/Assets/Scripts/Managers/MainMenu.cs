@@ -7,7 +7,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip titleMusic;
+    private AudioClip levelMusic;
+
     private float sliderLevel;
+
+    private void Start()
+    {
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().PlayMusic(titleMusic);
+    }
 
     public void NextLevel ()
     {

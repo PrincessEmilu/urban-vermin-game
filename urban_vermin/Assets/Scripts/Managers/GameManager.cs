@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     {
         if (audioManager == null)
             Debug.LogError("Audio Manager is null!");
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
