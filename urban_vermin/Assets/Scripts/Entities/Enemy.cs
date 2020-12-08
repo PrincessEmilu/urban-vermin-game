@@ -47,6 +47,7 @@ public class Enemy : AbstractFightingCharacter
                 else
                     spawnPoint = new Vector2(transform.position.x - swingDistance, transform.position.y);
                 attackHitbox = Instantiate(hitboxPrefab, spawnPoint, Quaternion.identity);
+                attackHitbox.transform.parent = transform; // Ensure that the hitbox moves with the enemy
                 attackHitbox.GetComponent<DamagingEntity>().sender = gameObject;
                 if(GetComponent<SpriteRenderer>().flipX) //set direction of hitbox
                     attackHitbox.GetComponent<DamagingEntity>().direction = 1;
@@ -120,5 +121,11 @@ public class Enemy : AbstractFightingCharacter
     {
         base.HandleDeath();
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (attackHitbox != null)
+            Destroy(attackHitbox);
     }
 }

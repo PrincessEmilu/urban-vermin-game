@@ -46,8 +46,23 @@ public class Player : AbstractFightingCharacter
 
     // Offsets for spawning the player's attacks - essentially an offset from the prefab's center
     private Vector2 bulletSpawnOffset;
-    private Vector2 flamethrowerOffset;
-    public int Ammo { get; private set; }
+    private Vector2 flamethrowerOffset; 
+
+    public int Ammo
+    {
+        get
+        {
+            return ammo;
+        }
+        set
+        {
+            if (value > maxAmmo)
+                ammo = maxAmmo;
+            else
+                ammo = value;
+        }
+    }
+
     public int MaxAmmo { get { return maxAmmo; } }
     public float Willpower { get; private set; }
 
@@ -64,8 +79,9 @@ public class Player : AbstractFightingCharacter
     private bool isUsingStaff;
 
     // Willpower cost per frame
-    private float flamethrowerCost = 0.2f;
+    private float flamethrowerCost = 0.5f;
 
+    private int ammo;
     private const int maxAmmo = 16;
     private const float maxWillpower = 100.0f;
     private const float willpowerRechargeRate = 0.25f;

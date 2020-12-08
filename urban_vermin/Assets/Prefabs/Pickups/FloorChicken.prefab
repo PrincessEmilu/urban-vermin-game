@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4131552108603615409
+--- !u!1 &4557323999941490135
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6449687426014723813}
-  - component: {fileID: 4512758018761180081}
-  - component: {fileID: 6914019943834403548}
-  - component: {fileID: 1797691316885156489}
-  - component: {fileID: 6470617928653836689}
-  m_Layer: 8
-  m_Name: Boss
+  - component: {fileID: 103994736474242631}
+  - component: {fileID: 2849057901010082683}
+  m_Layer: 0
+  m_Name: floorChicken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6449687426014723813
+--- !u!4 &103994736474242631
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4131552108603615409}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.94, y: -1.23, z: 0.5}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
+  m_GameObject: {fileID: 4557323999941490135}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 6574294143224256536}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4512758018761180081
+--- !u!212 &2849057901010082683
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4131552108603615409}
+  m_GameObject: {fileID: 4557323999941490135}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -51,7 +48,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2769a472bcbf627469620dfc8569a74b, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -71,58 +68,72 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3376686438028172581, guid: ff64b238cf28c2047a75aea70050fdcf,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 80e142b57eda6ee449c52524d1f7486f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.43, y: 2.07}
+  m_Size: {x: 1.05, y: 0.9}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6914019943834403548
+--- !u!1 &4634799469127498852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6574294143224256536}
+  - component: {fileID: -5392407575639208509}
+  - component: {fileID: 8523503364807288800}
+  - component: {fileID: 21834352179036966}
+  m_Layer: 0
+  m_Name: FloorChicken
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6574294143224256536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4634799469127498852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.163788, y: 2.3194869, z: -7.21875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 103994736474242631}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5392407575639208509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4131552108603615409}
+  m_GameObject: {fileID: 4634799469127498852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fabef8dae8ac30e4a8d3724f25f6e01f, type: 3}
+  m_Script: {fileID: 11500000, guid: c9671f18cdae6a740a897de4ef36eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  hitboxPrefab: {fileID: 0}
-  health: 1000
-  player: {fileID: 0}
-  entranceAnimation: 1
-  dying: -1
-  healthBar: {fileID: 0}
-  state: 0
-  stateTimer: 0
-  sprites:
-  - {fileID: 3376686438028172581, guid: ff64b238cf28c2047a75aea70050fdcf, type: 3}
-  - {fileID: 3376686438028172581, guid: ff64b238cf28c2047a75aea70050fdcf, type: 3}
-  - {fileID: -21489150815663186, guid: ff64b238cf28c2047a75aea70050fdcf, type: 3}
-  - {fileID: 1102003480649412143, guid: ff64b238cf28c2047a75aea70050fdcf, type: 3}
-  - {fileID: 3376686438028172581, guid: ff64b238cf28c2047a75aea70050fdcf, type: 3}
-  - {fileID: 3376686438028172581, guid: ff64b238cf28c2047a75aea70050fdcf, type: 3}
-  slamPrefab: {fileID: 8654691786916145505, guid: f00fcb56ba45fcc478e8074d13f3c838,
-    type: 3}
-  throwPrefab: {fileID: 8654691786916145505, guid: 54123360d97395141bbd18523877c2ca,
-    type: 3}
---- !u!50 &1797691316885156489
+  healthIncrease: 25
+--- !u!50 &8523503364807288800
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4131552108603615409}
+  m_GameObject: {fileID: 4634799469127498852}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -136,19 +147,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &6470617928653836689
-CapsuleCollider2D:
+--- !u!61 &21834352179036966
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4131552108603615409}
+  m_GameObject: {fileID: 4634799469127498852}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.16}
-  m_Size: {x: 3.9, y: 4.1}
-  m_Direction: 0
+  m_Offset: {x: 0.009448528, y: 0.08503747}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0944853, y: 0.82992506}
+  m_EdgeRadius: 0

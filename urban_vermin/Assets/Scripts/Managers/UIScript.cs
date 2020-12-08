@@ -40,13 +40,15 @@ public class UIScript : MonoBehaviour
         //Bullets
         if(playerS.Ammo > bulletCount)
         {
-            GameObject.Find("BulletOrigin").transform.GetChild(bulletCount - 1).GetComponent<Image>().color = Color.white;
+            GameObject.Find("BulletOrigin").transform.GetChild(bulletCount).GetComponent<Image>().color = Color.white;
             bulletCount += 1;
+            Debug.Log("Add bullet to ui");
         }
         else if (playerS.Ammo < bulletCount)
         {
             GameObject.Find("BulletOrigin").transform.GetChild(bulletCount - 1).GetComponent<Image>().color = Color.black;
             bulletCount -= 1;
+            Debug.Log("Remove bullet from ui");
         }
     }
 

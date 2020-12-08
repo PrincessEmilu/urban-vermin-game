@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 6696662931793509647}
   - component: {fileID: 1950040645988955651}
   - component: {fileID: 7452377333353569236}
-  - component: {fileID: 2250566350964140484}
   m_Layer: 0
-  m_Name: Hitbox
+  m_Name: SkeletonHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,24 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   knockBack: 75
---- !u!50 &2250566350964140484
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8654691786916145505}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  direction: 0
+  destroyOnApplyDamage: 0
+  disableOnApplyDamage: 0
+  sender: {fileID: 0}

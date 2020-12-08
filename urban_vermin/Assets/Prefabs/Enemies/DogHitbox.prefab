@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8893637473260484398}
   - component: {fileID: 4362916011551652898}
   - component: {fileID: 4679230042783257077}
-  - component: {fileID: 4087088619594114021}
   m_Layer: 0
   m_Name: DogHitbox
   m_TagString: Untagged
@@ -74,25 +73,6 @@ MonoBehaviour:
   damage: 3
   knockBack: 50
   direction: 0
+  destroyOnApplyDamage: 0
+  disableOnApplyDamage: 0
   sender: {fileID: 0}
---- !u!50 &4087088619594114021
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6888390933133943616}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0

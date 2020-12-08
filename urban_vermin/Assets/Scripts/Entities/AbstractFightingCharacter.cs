@@ -32,7 +32,7 @@ public abstract class AbstractFightingCharacter : MonoBehaviour
     protected virtual void ApplyDamage(float damage)
     {
         health -= damage;
-        Debug.Log(gameObject.name + " has taken " + damage + " damage!");
+        //Debug.Log(gameObject.name + " has taken " + damage + " damage!");
 
         if (health <= 0)
             HandleDeath();
@@ -40,7 +40,7 @@ public abstract class AbstractFightingCharacter : MonoBehaviour
 
     protected virtual void HandleDeath()
     {
-        Debug.Log(gameObject.name + " has died!");
+        //Debug.Log(gameObject.name + " has died!");
     }
     protected abstract void ApplyKnockback(float knockBack, int direction);
 

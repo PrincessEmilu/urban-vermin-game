@@ -98,15 +98,15 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   hitboxPrefab: {fileID: 8654691786916145505, guid: 4c7b8608104f4b84e8b81ba3eb16db1c,
     type: 3}
-  health: 0
+  health: 100
   sprites:
   - {fileID: 1664357772287024801, guid: 6d12c7ed92f9c0a49a09b0ac0d10b2e4, type: 3}
   - {fileID: -964824239653993824, guid: 6d12c7ed92f9c0a49a09b0ac0d10b2e4, type: 3}
   - {fileID: -3264722998049715623, guid: 6d12c7ed92f9c0a49a09b0ac0d10b2e4, type: 3}
   speed: 1
   attackDistance: 1.6
-  attackSpeed: 35
-  swingDistance: 0.5
+  attackSpeed: 20
+  swingDistance: 1
   attackAudio: {fileID: 8300000, guid: 5ae80991f9a01ed48a937f997df022fd, type: 3}
 --- !u!50 &498975019201558284
 Rigidbody2D:

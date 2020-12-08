@@ -208,6 +208,7 @@ MonoBehaviour:
   staffInstance: {fileID: 2997106612772538093}
   gunshotSound: {fileID: 0}
   meleeSound: {fileID: 0}
+  fireSound: {fileID: 0}
   gunSprite: {fileID: -4065260147618722494, guid: 93883f021f0533342886246cea8ced7f,
     type: 3}
   meleeSprite: {fileID: -3771753937956194462, guid: 93883f021f0533342886246cea8ced7f,
@@ -440,12 +441,12 @@ PrefabInstance:
     - target: {fileID: -4880036927844719497, guid: 78468e48c03ea0d47b12ef0b845a9212,
         type: 3}
       propertyPath: m_Offset.x
-      value: -0.64542687
+      value: -1.5545788
       objectReference: {fileID: 0}
     - target: {fileID: -4880036927844719497, guid: 78468e48c03ea0d47b12ef0b845a9212,
         type: 3}
       propertyPath: m_Size.x
-      value: 2.2908535
+      value: 1.6847525
       objectReference: {fileID: 0}
     - target: {fileID: -4880036927844719497, guid: 78468e48c03ea0d47b12ef0b845a9212,
         type: 3}
@@ -465,7 +466,7 @@ PrefabInstance:
     - target: {fileID: 6597978502018826817, guid: 78468e48c03ea0d47b12ef0b845a9212,
         type: 3}
       propertyPath: knockBack
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78468e48c03ea0d47b12ef0b845a9212, type: 3}
