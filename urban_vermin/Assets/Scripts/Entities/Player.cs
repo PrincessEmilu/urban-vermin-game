@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : AbstractFightingCharacter
 {
@@ -401,5 +402,15 @@ public class Player : AbstractFightingCharacter
     public void TakeDamage(float amount)
     {
         health -= amount;
+
+        if (health <= 0)
+            HandleDeath();
+    }
+
+    protected override void HandleDeath()
+    {
+        base.HandleDeath();
+
+        SceneManager.LoadScene("GameOver");
     }
 }

@@ -74,6 +74,8 @@ MonoBehaviour:
   damage: 5
   knockBack: 75
   direction: 0
+  destroyOnApplyDamage: 0
+  disableOnApplyDamage: 1
   sender: {fileID: 0}
 --- !u!50 &2250566350964140484
 Rigidbody2D:

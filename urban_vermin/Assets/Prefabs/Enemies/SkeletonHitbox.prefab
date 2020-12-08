@@ -70,9 +70,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be90840531f70849b7ad60e56ea38eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 20
   knockBack: 75
   direction: 0
   destroyOnApplyDamage: 0
-  disableOnApplyDamage: 0
+  disableOnApplyDamage: 1
   sender: {fileID: 0}
