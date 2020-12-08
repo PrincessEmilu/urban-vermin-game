@@ -282,6 +282,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flamethrower
       objectReference: {fileID: 0}
+    - target: {fileID: 4738474719052689038, guid: cb73ce55fb1fcae4d866486936e30d59,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerAttack
+      objectReference: {fileID: 0}
     - target: {fileID: 4738474719052689033, guid: cb73ce55fb1fcae4d866486936e30d59,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -382,6 +387,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Melee
+      objectReference: {fileID: 0}
+    - target: {fileID: 449706030765282066, guid: 78468e48c03ea0d47b12ef0b845a9212,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerAttack
       objectReference: {fileID: 0}
     - target: {fileID: 8997809017537221414, guid: 78468e48c03ea0d47b12ef0b845a9212,
         type: 3}
