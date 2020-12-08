@@ -73,4 +73,6 @@ MonoBehaviour:
   damage: 10
   knockBack: 50
   direction: 1
+  destroyOnApplyDamage: 0
+  disableOnApplyDamage: 0
   sender: {fileID: 0}
