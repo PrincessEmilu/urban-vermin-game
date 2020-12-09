@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().PlayMusic(titleMusic);
+        //GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().PlayMusic(titleMusic);
     }
 
     public void NextLevel ()

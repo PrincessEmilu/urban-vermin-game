@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 3773657056681516685}
+  titleMusic: {fileID: 8300000, guid: 076e8aa05e850654699cd3c2e46c3be9, type: 3}
+  levelMusic: {fileID: 8300000, guid: 1fcde95ee340e41449fea5f3477b09e7, type: 3}
+  bossMusic: {fileID: 8300000, guid: e6af10897465dc848b5eaa6e8d606ace, type: 3}
+  creditsMusic: {fileID: 8300000, guid: cfc3b6fa4ee072142866321e3179539b, type: 3}
 --- !u!114 &3773657056681516685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6908a88c7347a614b90ac120cddd56f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicBackground: {fileID: 0}
   musicSlider: {fileID: 0}
   sfxSlider: {fileID: 0}
   sfxSource: {fileID: 2464878479646986247}

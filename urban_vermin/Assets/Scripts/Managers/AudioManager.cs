@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
         // Sets the playerprefs for the first time loaded. Otherwise, read in saved values
         if (PlayerPrefs.GetString("PrefsSavedPreviously") == "")
         {
-            musicVolume = 1.0f;
+            musicVolume = 0.5f;
             sfxVolume = 1.0f;
 
             PlayerPrefs.SetFloat("musicVolume", musicVolume);
@@ -52,7 +52,7 @@ public class AudioManager : MonoBehaviour
         // Add listeners to the sliders and invokes a method when the value changes.
         //musicSlider.onValueChanged.AddListener(delegate { SetMusicVolume(); });
         //sfxSlider.onValueChanged.AddListener(delegate { SetSFXVolume(); });
-        PlayMusic(musicBackground);
+        //PlayMusic(musicBackground);
     }
 
     public void SetSFXVolume()
@@ -69,7 +69,6 @@ public class AudioManager : MonoBehaviour
 
     public void SetMusicVolume()
     {
-
         Debug.Log("Music volume changed");
         musicVolume = musicSlider.value;
 
@@ -91,6 +90,7 @@ public class AudioManager : MonoBehaviour
     {
         if (music != musicSource.clip)
         {
+            Debug.Log(music.name);
             musicSource.Stop();
             musicSource.clip = music;
             musicSource.Play();
